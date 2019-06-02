@@ -1,0 +1,23 @@
+---
+- name: Check if Docker-compose is already present.
+  command: which docker-compose
+  failed_when: false
+  changed_when: false
+  register: docker_command_result
+
+- name: Download Docker-compose source code via git clone.
+  git:
+    repo: https://github.com/docker/compose.git
+    dest: /tmp/compose
+    version: bump-1.23.2
+    update: yes
+  when: docker_command_result.rc == 1
+
+- name: Build docker-compose image.
+  docker_image:
+    build:
+      path: /tmp/compose
+      args: 
+        tag: armhf
+      dockerfile: Dockerfile.armhf
+    name: docker-compose
