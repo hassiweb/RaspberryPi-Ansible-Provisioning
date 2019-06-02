@@ -4,8 +4,8 @@
 docker_version: 18.06.1~ce~3-0~raspbian
 
 # Whether to install Docker Compose via Pip.
-docker_install_compose: true
-#docker_install_compose: false
+#docker_install_compose: true
+docker_install_compose: false
 
 # A list of users who will be added to the docker group.
 docker_users: []
